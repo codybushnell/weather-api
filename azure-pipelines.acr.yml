@@ -1,0 +1,17 @@
+trigger:
+  - master
+
+pool:
+  vmImage: "Ubuntu-16.04"
+
+variables:
+  imageName: "weather-api:$(build.buildId)"
+
+steps:
+  - script: |
+      docker build -f Dockerfile -t $(acrName).azurecr.io/$(imageName) .
+      docker login -u $(acrName) -p $pswd $(acrName).azurecr.io
+      docker push $(acrName).azurecr.io/$(imageName)
+    env:
+      pswd: $(acrPassword)
+    displayName: "Build and push Docker image"
