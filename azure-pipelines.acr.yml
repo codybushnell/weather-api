@@ -5,7 +5,7 @@ pool:
   vmImage: "Ubuntu-16.04"
 
 variables:
-  imageName: "weather-api:$(build.buildId)"
+  imageName: "weather-api:latest"
 
 steps:
   - script: |
